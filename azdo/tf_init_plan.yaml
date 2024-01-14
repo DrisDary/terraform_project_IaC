@@ -1,0 +1,28 @@
+triggers:
+- none
+
+name: "$(Build.DefinitionName)$(Rev:.r)"
+
+pool:
+  vmImage: "ubuntu-20.04"
+
+jobs:
+- job: terraform
+  timeoutInMinutes: 0
+  steps:
+
+  - task: Bash@3
+    displayName: terraform init-plan
+
+    inputs:
+      filePath: azdo\backend.sh
+      workingDirectory: $(WorkingDirectory)
+      arguments: plan
+
+    env:
+      ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+      ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+      ARM_TENANT_ID: $(ARM_TENANT_ID)
+      ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+
+
