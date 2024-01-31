@@ -1,5 +1,5 @@
 trigger:
-- none
+- main
 
 name: "$(Build.DefinitionName)$(Rev:.r)"
 
